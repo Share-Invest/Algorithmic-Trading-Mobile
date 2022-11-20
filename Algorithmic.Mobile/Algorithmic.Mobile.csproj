@@ -19,7 +19,7 @@
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -51,13 +51,14 @@
 		<RuntimeIdentifiers Condition="$(TargetFramework.Contains('-android'))">android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
 		<AssemblyName>Mobile</AssemblyName>
 		<Authors>cyberprophet</Authors>
-		<Company>ShareInvest</Company>
-		<Product>Algorithmic Trading</Product>
+		<Company>ShareInvest Corp.</Company>
+		<Product>Algorithmic-Trading</Product>
 		<Copyright>Copyright ⓒ 2022, ShareInvest Corp.</Copyright>
+		<Version>0.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|AnyCPU'">
-	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+		<EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	</PropertyGroup>
 
 </Project>
