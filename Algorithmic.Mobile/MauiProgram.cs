@@ -2,6 +2,8 @@
 
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 
+using ShareInvest.Configures;
+
 namespace ShareInvest;
 
 public static class MauiProgram
@@ -14,12 +16,17 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .UseDevExpress()
             .UseMauiCompatibility()
-            .ConfigureFonts(fonts =>
+            .ConfigureEssentials(o =>
             {
-                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                fonts.AddFont("univia-pro-regular.ttf", "Univia-Pro");
-                fonts.AddFont("roboto-bold.ttf", "Roboto-Bold");
-                fonts.AddFont("roboto-regular.ttf", "Roboto");
+                o.UseVersionTracking();
+            })
+            .ConfigureServices()
+            .ConfigureFonts(o =>
+            {
+                o.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                o.AddFont("univia-pro-regular.ttf", "Univia-Pro");
+                o.AddFont("roboto-bold.ttf", "Roboto-Bold");
+                o.AddFont("roboto-regular.ttf", "Roboto");
             });
         return builder.Build();
     }
