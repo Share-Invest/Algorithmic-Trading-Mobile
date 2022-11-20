@@ -7,7 +7,8 @@ namespace ShareInvest;
 public class MainApplication : MauiApplication
 {
     public MainApplication(IntPtr handle,
-                           JniHandleOwnership ownership) : base(handle, ownership)
+                           JniHandleOwnership ownership) : base(handle,
+                                                                ownership)
     {
 
     }
