@@ -4,19 +4,19 @@ using ShareInvest.Models.OpenAPI.Response;
 
 namespace ShareInvest.Services;
 
-public class StockService
+public class StockService : CoreHttpClient
 {
     public async Task<ObservableStock[]> GetAsync(string order, bool asc = false)
     {
-        var res = await client.TryGetAsync<Stock[]>(string.Concat(nameof(OPTKWFID),
-                                                                  '?',
-                                                                  nameof(order),
-                                                                  '=',
-                                                                  order,
-                                                                  '&',
-                                                                  nameof(asc),
-                                                                  '=',
-                                                                  asc));
+        var res = await TryGetAsync<Stock[]>(string.Concat(nameof(OPTKWFID),
+                                                           '?',
+                                                           nameof(order),
+                                                           '=',
+                                                           order,
+                                                           '&',
+                                                           nameof(asc),
+                                                           '=',
+                                                           asc));
         return res.Select(o => new ObservableStock(o.Code,
                                                    o.Name,
                                                    o.Current,
@@ -28,9 +28,8 @@ public class StockService
                                                    o.State))
                   .ToArray();
     }
-    public StockService()
+    public StockService() : base(Status.Address)
     {
-        client = new CoreHttpClient(Status.Address);
+
     }
-    readonly CoreHttpClient client;
 }
