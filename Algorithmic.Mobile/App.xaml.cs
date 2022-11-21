@@ -1,4 +1,7 @@
-﻿namespace ShareInvest;
+﻿using ShareInvest.Pages;
+using ShareInvest.Shells;
+
+namespace ShareInvest;
 
 public partial class App : Application
 {
@@ -6,6 +9,11 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        MainPage = new MainPage();
+#if WINDOWS||MACCATALYST
+
+#else
+        MainPage = new MobileShell();
+#endif
+        Routing.RegisterRoute(nameof(StocksPage), typeof(StocksPage));
     }
 }

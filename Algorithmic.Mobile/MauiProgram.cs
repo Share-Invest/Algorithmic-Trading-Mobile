@@ -21,6 +21,8 @@ public static class MauiProgram
                 o.UseVersionTracking();
             })
             .ConfigureServices()
+            .ConfigureViewModels()
+            .ConfigurePages()
             .ConfigureFonts(o =>
             {
                 o.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
