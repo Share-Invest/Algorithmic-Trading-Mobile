@@ -66,7 +66,7 @@ public partial class ObservableStock : ObservableObject
         }
         Code = code;
         Name = name;
-        State = state;
+        State = state.Replace('|', ' ');
 
         this.transactionAmount = Convert.ToUInt64(transactionAmount);
         this.volume = Convert.ToUInt64(volume);
