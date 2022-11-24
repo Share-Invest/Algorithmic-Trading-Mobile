@@ -70,7 +70,7 @@ public partial class ObservableStock : ObservableObject
 
         this.transactionAmount = Convert.ToUInt64(transactionAmount);
         this.volume = Convert.ToUInt64(volume);
-        this.rate = Math.Abs(Convert.ToDouble(rate));
+        this.rate = Math.Abs(Convert.ToDouble(rate) * 1e-2);
         this.current = Math.Abs(Convert.ToInt32(current));
         this.compareToPreviousDay = Math.Abs(Convert.ToInt32(compareToPreviousDay));
         this.compareToPreviousSign = compareToPreviousSign;
