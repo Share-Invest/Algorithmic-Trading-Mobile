@@ -37,11 +37,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Platforms\Android\Resources\values\network_security_config.xml" />
+		<AndroidResource Remove="Platforms\Android\Resources\values\network_security_config.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Platforms\Android\Resources\values\network_security_config.xml" />
+		<None Remove="Platforms\Android\Resources\values\network_security_config.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -55,7 +55,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Library.October.2022\Algorithmic.Library\Algorithmic.Library.csproj" />
+		<ProjectReference Include="..\..\Algorithmic-Trading-Library\Algorithmic.Library\Algorithmic.Library.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
