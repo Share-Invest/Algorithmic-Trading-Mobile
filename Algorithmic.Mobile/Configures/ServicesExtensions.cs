@@ -11,6 +11,7 @@ public static class ServicesExtensions
     {
         builder.Services.AddSingleton(Connectivity.Current)
                         .AddSingleton<StockService>()
+
                         .TryAddTransient<IHubService, StockHubService>();
 
         return builder;

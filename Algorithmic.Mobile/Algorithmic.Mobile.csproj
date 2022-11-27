@@ -45,6 +45,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="2.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 		<PackageReference Include="DevExpress.Maui.Charts" Version="22.1.6" />
 		<PackageReference Include="DevExpress.Maui.CollectionView" Version="22.1.6" />

@@ -12,7 +12,7 @@ public class StockHubService : CoreSignalR,
     public StockHubService() : base(string.Concat(Status.Address,
                                                   Resources.KIWOOM))
     {
-        _ = On("");
+        _ = On(nameof(IHubs.TransmitConclusionInformation));
     }
     public HubConnectionState State
     {
