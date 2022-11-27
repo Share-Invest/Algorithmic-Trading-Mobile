@@ -1,4 +1,10 @@
-﻿using ShareInvest.Models;
+﻿using DevExpress.Maui.Scheduler.Internal;
+
+using Microsoft.AspNetCore.SignalR.Client;
+
+using ShareInvest.Infrastructure;
+using ShareInvest.Models;
+using ShareInvest.Observers.OpenAPI;
 using ShareInvest.Properties;
 using ShareInvest.Services;
 
@@ -12,6 +18,28 @@ public class StocksViewModel : ViewModelBase
     {
         get;
     }
+    public override async Task DisposeAsync()
+    {
+        if (NetworkAccess.Internet == connectivity.NetworkAccess)
+        {
+            if (HubConnectionState.Connected == hub.State)
+            {
+                IsBusy = true;
+
+                foreach (var stock in StockCollection)
+                {
+                    await hub.RemoveFromGroupAsync(stock.Code);
+                }
+                await hub.StopAsync();
+            }
+            StockCollection.Clear();
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine(hub.State);
+#endif
+            ChunkCount = 0;
+        }
+        IsBusy = false;
+    }
     public override async Task InitializeAsync()
     {
         if (IsNotBusy)
@@ -20,11 +48,13 @@ public class StocksViewModel : ViewModelBase
                 if (NetworkAccess.Internet == connectivity.NetworkAccess)
                 {
                     IsBusy = true;
-#if ANDROID
-                    Platform.CurrentActivity.Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
-#endif
+
                     Stocks = await service.GetAsync(Title);
 
+                    if (HubConnectionState.Disconnected == hub.State)
+                    {
+                        await hub.StartAsync();
+                    }
                     LoadStocks();
                 }
                 else
@@ -55,7 +85,11 @@ public class StocksViewModel : ViewModelBase
         {
             if (i < Stocks.Length)
             {
-                StockCollection.Add(Stocks[i]);
+                var stock = Stocks[i];
+
+                StockCollection.Add(stock);
+
+                hub.AddToGroupAsync(stock.Code);
 
                 continue;
             }
@@ -66,11 +100,54 @@ public class StocksViewModel : ViewModelBase
         IsBusy = false;
     }
     public StocksViewModel(StockService service,
+                           IHubService hub,
                            IConnectivity connectivity)
     {
         chunkSize = 0x10;
+        this.hub = hub;
         this.service = service;
         this.connectivity = connectivity;
+
+        (hub as StockHubService).Send += async (sender, e) =>
+        {
+            if (e is RealMessageEventArgs res)
+            {
+                var index = Array.FindIndex(Stocks, o => o.Code.Equals(res.Key));
+
+                if (index >= 0 &&
+                    StockCollection.TryGetValue(index,
+                                                out ObservableStock observe))
+                {
+                    var resource = res.Data.Split('\t');
+
+                    observe = resource.Length switch
+                    {
+                        7 => new ObservableStock(observe.Code,
+                                                 observe.Name,
+                                                 resource[1],
+                                                 resource[3],
+                                                 resource[2],
+                                                 resource[6],
+                                                 resource[5],
+                                                 string.Empty,
+                                                 observe.State),
+
+                        _ => new ObservableStock(observe.Code,
+                                                 observe.Name,
+                                                 resource[1],
+                                                 resource[3],
+                                                 resource[2],
+                                                 resource[0xC],
+                                                 resource[7],
+                                                 resource[8],
+                                                 observe.State)
+                    };
+                }
+                return;
+            }
+            await SendToastMessage(sender.GetType().Name);
+        };
+        cts = new CancellationTokenSource();
 
         Title = nameof(Models.OpenAPI.Response.OPTKWFID.MarketCap);
 
@@ -86,5 +163,6 @@ public class StocksViewModel : ViewModelBase
     }
     readonly uint chunkSize;
     readonly StockService service;
+    readonly IHubService hub;
     readonly IConnectivity connectivity;
 }

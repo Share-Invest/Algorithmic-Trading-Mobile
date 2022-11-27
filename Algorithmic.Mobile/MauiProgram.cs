@@ -1,4 +1,6 @@
-﻿using DevExpress.Maui;
+﻿using CommunityToolkit.Maui;
+
+using DevExpress.Maui;
 
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 
@@ -16,6 +18,12 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .UseDevExpress()
             .UseMauiCompatibility()
+            .UseMauiCommunityToolkit(o =>
+            {
+                o.SetShouldSuppressExceptionsInConverters(false);
+                o.SetShouldSuppressExceptionsInBehaviors(false);
+                o.SetShouldSuppressExceptionsInAnimations(false);
+            })
             .ConfigureEssentials(o =>
             {
                 o.UseVersionTracking();
