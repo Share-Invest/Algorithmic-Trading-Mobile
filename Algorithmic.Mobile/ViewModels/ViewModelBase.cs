@@ -9,6 +9,8 @@ public abstract partial class ViewModelBase : ObservableObject
     public bool IsNotBusy => isBusy is false;
 
     public abstract Task InitializeAsync();
+
+    public abstract Task DisposeAsync();
     
     protected async Task DisplayAlert(string message)
     {
