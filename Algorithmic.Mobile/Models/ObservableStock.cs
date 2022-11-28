@@ -41,6 +41,48 @@ public partial class ObservableStock : ObservableObject
                            string transactionAmount,
                            string state)
     {
+        ConvertParameter(current,
+                         rate,
+                         compareToPreviousDay,
+                         compareToPreviousSign,
+                         volume);
+
+        this.transactionAmount = Convert.ToUInt64(transactionAmount);
+
+        Code = code;
+        Name = name;
+        State = state.Replace('|', ' ');
+    }
+    public ObservableStock(string current,
+                           string rate,
+                           string compareToPreviousDay,
+                           string compareToPreviousSign,
+                           string volume)
+    {
+        ConvertParameter(current,
+                         rate,
+                         compareToPreviousDay,
+                         compareToPreviousSign,
+                         volume);
+    }
+    public string Code
+    {
+        get;
+    }
+    public string Name
+    {
+        get;
+    }
+    public string State
+    {
+        get;
+    }
+    void ConvertParameter(string current,
+                          string rate,
+                          string compareToPreviousDay,
+                          string compareToPreviousSign,
+                          string volume)
+    {
         switch (current[0])
         {
             case '-':
@@ -64,27 +106,10 @@ public partial class ObservableStock : ObservableObject
                 sign = ' ';
                 break;
         }
-        Code = code;
-        Name = name;
-        State = state.Replace('|', ' ');
-
-        this.transactionAmount = Convert.ToUInt64(transactionAmount);
         this.volume = Convert.ToUInt64(volume);
         this.rate = Math.Abs(Convert.ToDouble(rate) * 1e-2);
         this.current = Math.Abs(Convert.ToInt32(current));
         this.compareToPreviousDay = Math.Abs(Convert.ToInt32(compareToPreviousDay));
         this.compareToPreviousSign = compareToPreviousSign;
-    }
-    public string Code
-    {
-        get;
-    }
-    public string Name
-    {
-        get;
-    }
-    public string State
-    {
-        get;
     }
 }

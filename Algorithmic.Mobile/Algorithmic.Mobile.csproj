@@ -9,7 +9,7 @@
 		<RootNamespace>ShareInvest</RootNamespace>
 
 		<!-- Display name -->
-		<ApplicationTitle>Ant</ApplicationTitle>
+		<ApplicationTitle>동학개미운동</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.shareinvest.algorithmic.mobile</ApplicationId>

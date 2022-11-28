@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.SignalR.Client;
 
 using ShareInvest.Infrastructure;
+using ShareInvest.Mappers;
 using ShareInvest.Models;
 using ShareInvest.Observers.OpenAPI;
 using ShareInvest.Properties;
@@ -101,10 +102,12 @@ public class StocksViewModel : ViewModelBase
     }
     public StocksViewModel(StockService service,
                            IHubService hub,
+                           IPropertyService property,
                            IConnectivity connectivity)
     {
         chunkSize = 0x10;
         this.hub = hub;
+        this.property = property;
         this.service = service;
         this.connectivity = connectivity;
 
@@ -122,15 +125,11 @@ public class StocksViewModel : ViewModelBase
 
                     var os = resource.Length switch
                     {
-                        7 => new ObservableStock(observe.Code,
-                                                 observe.Name,
-                                                 resource[1],
+                        7 => new ObservableStock(resource[1],
                                                  resource[3],
                                                  resource[2],
                                                  resource[6],
-                                                 resource[5],
-                                                 observe.TransactionAmount.ToString(),
-                                                 observe.State),
+                                                 resource[5]),
 
                         _ => new ObservableStock(observe.Code,
                                                  observe.Name,
@@ -142,15 +141,7 @@ public class StocksViewModel : ViewModelBase
                                                  resource[8],
                                                  observe.State)
                     };
-                    observe.Current = os.Current;
-                    observe.CompareToPreviousDay = os.CompareToPreviousDay;
-                    observe.CompareToPreviousSign = os.CompareToPreviousSign;
-                    observe.Rate = os.Rate;
-                    observe.Volume = os.Volume;
-                    observe.TransactionAmount = os.TransactionAmount;
-                    observe.Color = os.Color;
-                    observe.Attributes = os.Attributes;
-                    observe.Sign = os.Sign;
+                    property.SetValuesOfColumn(observe, os);
                 }
                 return;
             }
@@ -172,6 +163,7 @@ public class StocksViewModel : ViewModelBase
     }
     readonly uint chunkSize;
     readonly StockService service;
+    readonly IPropertyService property;
     readonly IHubService hub;
     readonly IConnectivity connectivity;
 }
