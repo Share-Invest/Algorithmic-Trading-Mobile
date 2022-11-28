@@ -65,6 +65,21 @@ public partial class ObservableStock : ObservableObject
                          compareToPreviousSign,
                          volume);
     }
+    public ObservableStock(string current,
+                           string rate,
+                           string compareToPreviousDay,
+                           string compareToPreviousSign,
+                           string volume,
+                           string transactionAmount)
+    {
+        ConvertParameter(current,
+                         rate,
+                         compareToPreviousDay,
+                         compareToPreviousSign,
+                         volume);
+
+        this.transactionAmount = Convert.ToUInt64(transactionAmount);
+    }
     public string Code
     {
         get;
@@ -88,9 +103,9 @@ public partial class ObservableStock : ObservableObject
             case '-':
                 color = AppTheme.Dark == Application.Current.RequestedTheme ? Colors.DeepSkyBlue :
                                                                               Colors.Blue;
+                sign = '▼';
                 attributes = "4".Equals(compareToPreviousSign) ? FontAttributes.Bold :
                                                                  FontAttributes.None;
-                sign = '▼';
                 break;
 
             case '+':

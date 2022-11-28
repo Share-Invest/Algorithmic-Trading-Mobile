@@ -123,25 +123,22 @@ public class StocksViewModel : ViewModelBase
                 {
                     var resource = res.Data.Split('\t');
 
-                    var os = resource.Length switch
-                    {
-                        7 => new ObservableStock(resource[1],
-                                                 resource[3],
-                                                 resource[2],
-                                                 resource[6],
-                                                 resource[5]),
+                    property.SetValuesOfColumn(observe,
+                                               resource.Length switch
+                                               {
+                                                   7 => new ObservableStock(resource[1],
+                                                                            resource[3],
+                                                                            resource[2],
+                                                                            resource[6],
+                                                                            resource[5]),
 
-                        _ => new ObservableStock(observe.Code,
-                                                 observe.Name,
-                                                 resource[1],
-                                                 resource[3],
-                                                 resource[2],
-                                                 resource[0xC],
-                                                 resource[7],
-                                                 resource[8],
-                                                 observe.State)
-                    };
-                    property.SetValuesOfColumn(observe, os);
+                                                   _ => new ObservableStock(resource[1],
+                                                                            resource[3],
+                                                                            resource[2],
+                                                                            resource[0xC],
+                                                                            resource[7],
+                                                                            resource[8])
+                                               });
                 }
                 return;
             }
