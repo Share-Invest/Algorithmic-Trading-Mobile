@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.SignalR.Client;
 
 using ShareInvest.Infrastructure;
+using ShareInvest.Mappers;
 using ShareInvest.Models;
 using ShareInvest.Observers.OpenAPI;
 using ShareInvest.Properties;
@@ -101,10 +102,12 @@ public class StocksViewModel : ViewModelBase
     }
     public StocksViewModel(StockService service,
                            IHubService hub,
+                           IPropertyService property,
                            IConnectivity connectivity)
     {
         chunkSize = 0x10;
         this.hub = hub;
+        this.property = property;
         this.service = service;
         this.connectivity = connectivity;
 
@@ -120,28 +123,22 @@ public class StocksViewModel : ViewModelBase
                 {
                     var resource = res.Data.Split('\t');
 
-                    observe = resource.Length switch
-                    {
-                        7 => new ObservableStock(observe.Code,
-                                                 observe.Name,
-                                                 resource[1],
-                                                 resource[3],
-                                                 resource[2],
-                                                 resource[6],
-                                                 resource[5],
-                                                 string.Empty,
-                                                 observe.State),
+                    property.SetValuesOfColumn(observe,
+                                               resource.Length switch
+                                               {
+                                                   7 => new ObservableStock(resource[1],
+                                                                            resource[3],
+                                                                            resource[2],
+                                                                            resource[6],
+                                                                            resource[5]),
 
-                        _ => new ObservableStock(observe.Code,
-                                                 observe.Name,
-                                                 resource[1],
-                                                 resource[3],
-                                                 resource[2],
-                                                 resource[0xC],
-                                                 resource[7],
-                                                 resource[8],
-                                                 observe.State)
-                    };
+                                                   _ => new ObservableStock(resource[1],
+                                                                            resource[3],
+                                                                            resource[2],
+                                                                            resource[0xC],
+                                                                            resource[7],
+                                                                            resource[8])
+                                               });
                 }
                 return;
             }
@@ -163,6 +160,7 @@ public class StocksViewModel : ViewModelBase
     }
     readonly uint chunkSize;
     readonly StockService service;
+    readonly IPropertyService property;
     readonly IHubService hub;
     readonly IConnectivity connectivity;
 }
