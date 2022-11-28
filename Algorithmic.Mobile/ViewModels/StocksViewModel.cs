@@ -120,7 +120,7 @@ public class StocksViewModel : ViewModelBase
                 {
                     var resource = res.Data.Split('\t');
 
-                    observe = resource.Length switch
+                    var os = resource.Length switch
                     {
                         7 => new ObservableStock(observe.Code,
                                                  observe.Name,
@@ -129,7 +129,7 @@ public class StocksViewModel : ViewModelBase
                                                  resource[2],
                                                  resource[6],
                                                  resource[5],
-                                                 string.Empty,
+                                                 observe.TransactionAmount.ToString(),
                                                  observe.State),
 
                         _ => new ObservableStock(observe.Code,
@@ -142,6 +142,15 @@ public class StocksViewModel : ViewModelBase
                                                  resource[8],
                                                  observe.State)
                     };
+                    observe.Current = os.Current;
+                    observe.CompareToPreviousDay = os.CompareToPreviousDay;
+                    observe.CompareToPreviousSign = os.CompareToPreviousSign;
+                    observe.Rate = os.Rate;
+                    observe.Volume = os.Volume;
+                    observe.TransactionAmount = os.TransactionAmount;
+                    observe.Color = os.Color;
+                    observe.Attributes = os.Attributes;
+                    observe.Sign = os.Sign;
                 }
                 return;
             }
