@@ -4,10 +4,27 @@
        xmlns:page="clr-namespace:ShareInvest.Pages"       
        xmlns:viewmodel="clr-namespace:ShareInvest.ViewModels"
        x:Class="ShareInvest.Shells.MobileShell"
+       x:DataType="viewmodel:ShellViewModel"       
        FlyoutBehavior="Disabled">
 
-    <ShellContent Shell.NavBarIsVisible="False"
-                  ContentTemplate="{DataTemplate page:StocksPage}">
-    </ShellContent>
+    <TabBar>
+
+        <Tab Icon="{Binding Account.Icon}"
+             Title="{Binding Account.Title}">
+
+            <ShellContent Shell.NavBarIsVisible="False"
+                          ContentTemplate="{DataTemplate page:AccountsPage}">
+            </ShellContent>
+        </Tab>
+
+        <Tab Icon="{Binding Stock.Icon}"
+             Title="{Binding Stock.Title}">
+
+            <ShellContent Shell.NavBarIsVisible="False"
+                          ContentTemplate="{DataTemplate page:StocksPage}">
+            </ShellContent>
+        </Tab>
+
+    </TabBar>
 
 </Shell>

@@ -61,6 +61,15 @@ namespace ShareInvest.Properties {
         }
         
         /// <summary>
+        ///   계좌과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Account {
+            get {
+                return ResourceManager.GetString("Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   /hubs/kiwoom과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string KIWOOM {
@@ -84,6 +93,15 @@ namespace ShareInvest.Properties {
         internal static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   종목과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Stock {
+            get {
+                return ResourceManager.GetString("Stock", resourceCulture);
             }
         }
     }

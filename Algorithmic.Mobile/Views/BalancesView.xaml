@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"            
+             xmlns:model="clr-namespace:ShareInvest.Models"
+             xmlns:viewmodel="clr-namespace:ShareInvest.ViewModels"
+             x:DataType="viewmodel:BalancesViewModel"
+             x:Class="ShareInvest.Views.BalancesView">
+
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+
+</ContentView>
