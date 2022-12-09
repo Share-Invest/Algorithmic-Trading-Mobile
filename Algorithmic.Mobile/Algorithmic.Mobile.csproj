@@ -37,6 +37,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\clock.svg" />
+	  <None Remove="Resources\Images\clock_dark.svg" />
+	  <None Remove="Resources\Images\home.svg" />
+	  <None Remove="Resources\Images\home_dark.svg" />
+	  <None Remove="Resources\Images\settings.svg" />
+	  <None Remove="Resources\Images\settings_dark.svg" />
+	  <None Remove="Resources\Images\share.svg" />
+	  <None Remove="Resources\Images\share_dark.svg" />
+	  <None Remove="Resources\Images\together.svg" />
+	  <None Remove="Resources\Images\together_dark.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="2.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 		<PackageReference Include="DevExpress.Maui.Charts" Version="22.1.6" />
@@ -52,10 +65,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="Pages\AccountsPage.xaml.cs">
+		  <DependentUpon>AccountsPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Properties\Resources.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Views\BalancesView.xaml.cs">
+		  <DependentUpon>BalancesView.xaml</DependentUpon>
 		</Compile>
 	</ItemGroup>
 
@@ -67,6 +86,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<MauiXaml Update="Pages\AccountsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Pages\StocksPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -78,6 +100,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Shells\MobileShell.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\BalancesView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
 

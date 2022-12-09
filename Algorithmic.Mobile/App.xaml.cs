@@ -15,5 +15,6 @@ public partial class App : Application
         MainPage = new MobileShell();
 #endif
         Routing.RegisterRoute(nameof(StocksPage), typeof(StocksPage));
+        Routing.RegisterRoute(nameof(AccountsPage), typeof(AccountsPage));
     }
 }
