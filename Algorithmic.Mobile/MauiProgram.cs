@@ -25,7 +25,6 @@ public static class MauiProgram
                 o.SetShouldSuppressExceptionsInBehaviors(false);
                 o.SetShouldSuppressExceptionsInAnimations(false);
             })
-            .UseMauiMaps()
             .ConfigureEssentials(o =>
             {
                 o.UseVersionTracking();
