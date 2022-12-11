@@ -13,8 +13,10 @@ public partial class App : Application
 
 #else
         MainPage = new MobileShell();
-#endif
+
         Routing.RegisterRoute(nameof(StocksPage), typeof(StocksPage));
         Routing.RegisterRoute(nameof(AccountsPage), typeof(AccountsPage));
+        Routing.RegisterRoute(nameof(MapPage), typeof(MapPage));
+#endif
     }
 }

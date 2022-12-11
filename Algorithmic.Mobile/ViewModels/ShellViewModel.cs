@@ -25,8 +25,19 @@ public class ShellViewModel
     {
         get; set;
     }
+    public AppSection Map
+    {
+        get; set;
+    }
     void Create()
     {
+        Map = new AppSection
+        {
+            TargetType = typeof(MapPage),
+            Title = Properties.Resources.Map,
+            Icon = unspecified ? "share_dark.svg" :
+                                 "share.svg"
+        };
         Account = new AppSection
         {
             TargetType = typeof(AccountsPage),
@@ -38,8 +49,8 @@ public class ShellViewModel
         {
             TargetType = typeof(StocksPage),
             Title = Properties.Resources.Stock,
-            Icon = unspecified ? "share_dark.svg" :
-                                 "share.svg"
+            Icon = unspecified ? "home_dark.svg" :
+                                 "home.svg"
         };
     }
     readonly bool unspecified;

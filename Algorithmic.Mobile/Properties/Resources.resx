@@ -118,10 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Account" xml:space="preserve">
-    <value>계좌</value>
+    <value>자산</value>
   </data>
   <data name="KIWOOM" xml:space="preserve">
     <value>/hubs/kiwoom</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>지도</value>
   </data>
   <data name="NETWORKACCESS" xml:space="preserve">
     <value>check internet and try again.</value>

@@ -61,7 +61,7 @@ namespace ShareInvest.Properties {
         }
         
         /// <summary>
-        ///   계좌과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   자산과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Account {
             get {
@@ -75,6 +75,15 @@ namespace ShareInvest.Properties {
         internal static string KIWOOM {
             get {
                 return ResourceManager.GetString("KIWOOM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   지도과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
             }
         }
         
