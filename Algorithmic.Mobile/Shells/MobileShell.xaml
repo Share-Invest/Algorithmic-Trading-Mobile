@@ -9,11 +9,11 @@
 
     <TabBar>
 
-        <Tab Icon="{Binding Account.Icon}"
-             Title="{Binding Account.Title}">
+        <Tab Icon="{Binding Map.Icon}"
+             Title="{Binding Map.Title}">
 
             <ShellContent Shell.NavBarIsVisible="False"
-                          ContentTemplate="{DataTemplate page:AccountsPage}">
+                          ContentTemplate="{DataTemplate page:MapPage}">
             </ShellContent>
         </Tab>
 
@@ -22,6 +22,14 @@
 
             <ShellContent Shell.NavBarIsVisible="False"
                           ContentTemplate="{DataTemplate page:StocksPage}">
+            </ShellContent>
+        </Tab>
+
+        <Tab Icon="{Binding Account.Icon}"
+             Title="{Binding Account.Title}">
+
+            <ShellContent Shell.NavBarIsVisible="False"
+                          ContentTemplate="{DataTemplate page:AccountsPage}">
             </ShellContent>
         </Tab>
 
