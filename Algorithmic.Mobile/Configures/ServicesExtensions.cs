@@ -18,4 +18,8 @@ public static class ServicesExtensions
 
         return builder;
     }
+    public static MauiAppBuilder UseMauiMaps(this MauiAppBuilder builder)
+    {
+        return builder;
+    }
 }

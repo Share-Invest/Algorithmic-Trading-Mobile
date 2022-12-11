@@ -37,10 +37,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Fonts\OpenSans-Semibold.ttf" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="2.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 		<PackageReference Include="DevExpress.Maui.Charts" Version="22.1.6" />
@@ -49,7 +45,6 @@
 		<PackageReference Include="DevExpress.Maui.Core" Version="22.1.6" />
 		<PackageReference Include="DevExpress.Maui.DataGrid" Version="22.1.6" />
 		<PackageReference Include="DevExpress.Maui.Scheduler" Version="22.1.6" />
-		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="7.0.49" />
 	</ItemGroup>
 
 	<ItemGroup>
